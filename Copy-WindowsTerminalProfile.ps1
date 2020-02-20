@@ -1,11 +1,9 @@
 [CmdletBinding()]
 param()
 
-$packagesDirectory = "$($env:USERPROFILE)\AppData\Local\Packages"
+$windowsTerminalDirectory = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState"
 
-$windowsTerminalDirectory = Get-ChildItem -Path $packagesDirectory -Filter "Microsoft.WindowsTerminal*" -Directory
-
-$jsonProfiles = Get-ChildItem -Path $windowsTerminalDirectory.FullName profiles.json -File -Recurse
+$jsonProfiles = Get-ChildItem -Path $windowsTerminalDirectory profiles.json -File -Recurse
 
 if ($jsonProfiles.Count -eq 1) {
     Write-Verbose "Copying current Windows Terminal profiles.json to current directory."
